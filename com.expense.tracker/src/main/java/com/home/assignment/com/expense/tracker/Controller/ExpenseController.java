@@ -1,5 +1,7 @@
 package com.home.assignment.com.expense.tracker.Controller;
 
+import com.home.assignment.com.expense.tracker.Exception.ExpenseNotFoundException;
+import com.home.assignment.com.expense.tracker.Exception.ExpenseNotFoundException;
 import com.home.assignment.com.expense.tracker.Service.ExpenseService;
 import com.home.assignment.com.expense.tracker.Service.MonthlyExpenseReport;
 import com.home.assignment.com.expense.tracker.UserEntiry.Expense;
@@ -21,8 +23,11 @@ public class ExpenseController {
 
     @GetMapping("/getExpensedata/{id}")
     public Expense getExpenseById(@PathVariable Long id){
-
-        return expenseService.getExpenseDataById(id);
+        Expense expense=expenseService.getExpenseDataById(id);
+        if(expense==null){
+            throw new ExpenseNotFoundException("This user do not have any expense");
+        }
+        return expense;
     }
 
     @GetMapping("/getallexpense")
@@ -56,7 +61,7 @@ public class ExpenseController {
     }
 
     @GetMapping("/getdataByCategory")
-    public double getExpenseBycatogry(@RequestParam Long id,@RequestParam String category){
+    public double getExpenseBycatogry(@RequestParam Long id,@RequestParam String category) throws Exception {
         return expenseService.getExpenseByCategory(id,category);
     }
 

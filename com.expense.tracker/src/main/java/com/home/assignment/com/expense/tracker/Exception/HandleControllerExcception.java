@@ -1,4 +1,4 @@
-package com.home.assignment.com.expense.tracker;
+package com.home.assignment.com.expense.tracker.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class HandleControllerExcception {
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<String> HandleusernotfoundException(UserNotFoundException ex){
+    @ExceptionHandler(ExpenseNotFoundException.class)
+    public ResponseEntity<String> HandleusernotfoundException(ExpenseNotFoundException ex){
         return  new ResponseEntity <>(ex.getMessage(),HttpStatus.NOT_FOUND);
     }
 

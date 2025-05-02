@@ -1,5 +1,6 @@
 package com.home.assignment.com.expense.tracker.Service;
 
+import com.home.assignment.com.expense.tracker.Exception.ExpenseNotFoundException;
 import com.home.assignment.com.expense.tracker.Repository.ExpenseRepository;
 import com.home.assignment.com.expense.tracker.UserEntiry.Expense;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class ExpenseService {
     //update the Expense
     public Expense updateExpense(Expense updatedExpense, Long id) {
         Expense expense = expenseRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Expense not found"));
+                .orElseThrow(() ->  new ExpenseNotFoundException("This user do not have any expense"));
 
         expense.setAmount(updatedExpense.getAmount());
         expense.setCategory(updatedExpense.getCategory());
